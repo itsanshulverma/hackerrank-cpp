@@ -1,7 +1,41 @@
 # Class Templates Problem
 
 [Problem Link - HackerRank](https://www.hackerrank.com/challenges/c-class-templates/problem)
-- Submission by [@itsanshulverma](https://github.com/itanshulverma)
+- Submission by [@itsanshulverma](https://github.com/itanshulverma)  
+
+## Problems & References
+
+### Common Problem - Time Limit Exceeded.
+### Solution: 
+```cpp
+int  start_up() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  return  0;
+}
+
+int  static  r  =  start_up();
+
+#define  endl  '\n';
+```
+in C++14 mode.
+Make this run once before main.
+[Original Solution Link](https://www.hackerrank.com/challenges/c-class-templates/forum/comments/654560)
+
+### Explanation:
+- The static `start_up` function speeds up _cout_ and `#define` changes endl to '\n', that prevents flushing buffer for each line.
+
+by [fefe_wyx](https://www.hackerrank.com/challenges/c-class-templates/forum/comments/450686) on Hackerrank:
+
+> There are quite a lot of I/O cin >> ..., cout <<... going on in the program. This just make these faster.
+The C++ cin, cout must sync with stdin and stdout, if you want to use all of them. Here the latter are not used at all, so no need to sync with them.
+cin, cout must also sync (be tied) with each other, to make interaction with user (to make sure the use can see all the result of cout, before a cin executes). There is actually no interaction needed here, so this relation is also not need.
+All these sync/tie takes time. As mosting of the time in this program is I/O(cin and cout. the calculation actually would not take much time), remove sync/tie can make this program run much faster. (I did't test the actually time used though)
+For more details, check this: https://stackoverflow.com/a/31165481/1058916
+
+ - https://stackoverflow.com/questions/18892281/most-optimized-way-of-concatenation-in-strings
+
+---
 
 ## Problem Statement
 
@@ -43,10 +77,10 @@ Each of the next  line contains the type of the elements provided and depending 
 
 **Constraints**
 
-  
-, where  is any float value  
-, where valueint  is any int value  
-, where  is the length of any string
+- <img src="https://latex.codecogs.com/png.latex?{1}\leq{n}\leq{5}*{10^5}" />
+- <img src="https://latex.codecogs.com/png.latex?{1.0}\leq{value_{float}}\leq{10.0}"/>, where value_float is any float value 
+- <img src="https://latex.codecogs.com/png.latex?{1}\leq{value_{int}}\leq{10^5}"/>, where value_int is any int value 
+- <img src="https://latex.codecogs.com/gif.latex?{0}\leq{len_{string}}\leq{10}"/>, where len_string is the length of any string
 
 **The time limit for this challenge is 4 seconds.**
 
@@ -77,36 +111,3 @@ JohnDoe
 
 "Doe" when appended with "John" gives "JohnDoe". 2 added to 1 gives 3, and 1.5 added to 4.0 gives 5.5.
   
-  
-
-## Problems & References
-
-### Common Problem - Time Limit Exceeded.
-### Solution: 
-```cpp
-int  start_up() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
-  return  0;
-}
-
-int  static  r  =  start_up();
-
-#define  endl  '\n';
-```
-in C++14 mode.
-Make this run once before main.
-[Original Solution Link](https://www.hackerrank.com/challenges/c-class-templates/forum/comments/654560)
-
-### Explanation:
-- The static `start_up` function speeds up _cout_ and `#define` changes endl to '\n', that prevents flushing buffer for each line.
-
-by [fefe_wyx](https://www.hackerrank.com/challenges/c-class-templates/forum/comments/450686) on Hackerrank:
-
-> There are quite a lot of I/O cin >> ..., cout <<... going on in the program. This just make these faster.
-The C++ cin, cout must sync with stdin and stdout, if you want to use all of them. Here the latter are not used at all, so no need to sync with them.
-cin, cout must also sync (be tied) with each other, to make interaction with user (to make sure the use can see all the result of cout, before a cin executes). There is actually no interaction needed here, so this relation is also not need.
-All these sync/tie takes time. As mosting of the time in this program is I/O(cin and cout. the calculation actually would not take much time), remove sync/tie can make this program run much faster. (I did't test the actually time used though)
-For more details, check this: https://stackoverflow.com/a/31165481/1058916
-
- - https://stackoverflow.com/questions/18892281/most-optimized-way-of-concatenation-in-strings
